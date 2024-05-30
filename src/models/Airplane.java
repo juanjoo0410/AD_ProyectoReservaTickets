@@ -82,7 +82,7 @@ public class Airplane {
         String nextPassenger = waitingQueues.get(seatNumber).poll();
         if (nextPassenger != null) {
             seats.put(seatNumber, nextPassenger);
-            System.out.println("Seat " + seatNumber + " assigned to " + nextPassenger + " from waiting list.");
+            System.out.println("Asiento " + seatNumber + " asignado a " + nextPassenger + " por estar en cola.");
         }
     }
 
@@ -102,8 +102,8 @@ public class Airplane {
         lock.lock();
         try {
             for (Map.Entry<Integer, String> entry : seats.entrySet()) {
-                status.append("Seat ").append(entry.getKey()).append(": ")
-                      .append(entry.getValue() == null ? "Available" : entry.getValue())
+                status.append("Asiento ").append(entry.getKey()).append(": ")
+                      .append(entry.getValue() == null ? "Habilitado" : entry.getValue())
                       .append("\n");
             }
         } finally {
