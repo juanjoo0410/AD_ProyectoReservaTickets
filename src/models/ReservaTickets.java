@@ -3,16 +3,15 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Airplane {
+public class ReservaTickets {
     private final int totalSeats = 30;
     private final Map<Integer, String> seats = new HashMap<>();
     private final Map<Integer, ConcurrentLinkedQueue<String>> waitingQueues = new HashMap<>();
     private final ReentrantLock lock = new ReentrantLock();
 
-    public Airplane() {
+    public ReservaTickets() {
         for (int i = 1; i <= totalSeats; i++) {
             seats.put(i, null);
             waitingQueues.put(i, new ConcurrentLinkedQueue<>());
@@ -85,17 +84,6 @@ public class Airplane {
             System.out.println("Asiento " + seatNumber + " asignado a " + nextPassenger + " por estar en cola.");
         }
     }
-
-//    public void printSeats() {
-//        lock.lock();
-//        try {
-//            for (Map.Entry<Integer, String> entry : seats.entrySet()) {
-//                System.out.println("Seat " + entry.getKey() + ": " + (entry.getValue() == null ? "Available" : entry.getValue()));
-//            }
-//        } finally {
-//            lock.unlock();
-//        }
-//    }
     
     public String getSeatsStatus() {
         StringBuilder status = new StringBuilder();
