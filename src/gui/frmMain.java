@@ -198,7 +198,7 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     private boolean isEmpty(String nomCliente, String numAsiento) {
-        if (numAsiento.isEmpty() || nomCliente == "Seleccionar..") {
+        if (numAsiento.isEmpty() || "Seleccionar..".equals(nomCliente)) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos para la reserva.",
                     "Campos incompletos", JOptionPane.WARNING_MESSAGE);
             return true;
@@ -254,7 +254,7 @@ public class frmMain extends javax.swing.JFrame {
         btnEliminarV3 = new javax.swing.JButton();
         btnCambiarV3 = new javax.swing.JButton();
         cmbPasajerosV3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnPrueba = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -516,8 +516,13 @@ public class frmMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("Prueba de concurrencia");
+        btnPrueba.setBackground(new java.awt.Color(255, 255, 204));
+        btnPrueba.setText("Prueba de concurrencia");
+        btnPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Log", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -552,7 +557,7 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(pnlVentanilla2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlVentanilla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlVentanilla3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(209, 209, 209)
@@ -586,7 +591,7 @@ public class frmMain extends javax.swing.JFrame {
                             .addComponent(jScrollPane2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(btnPrueba)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -663,6 +668,22 @@ public class frmMain extends javax.swing.JFrame {
         singleNumbers(evt);
     }//GEN-LAST:event_txtAsientoV3KeyTyped
 
+    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        if (txtAsientoV1.getText().isEmpty() || 
+                "Seleccionar..".equals(cmbPasajerosV1.getSelectedItem().toString()) ||
+                txtAsientoV2.getText().isEmpty() || 
+                "Seleccionar..".equals(cmbPasajerosV2.getSelectedItem().toString()) ||
+                txtAsientoV3.getText().isEmpty() || 
+                "Seleccionar..".equals(cmbPasajerosV3.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos para la reserva masiva.",
+                    "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+        } else {
+            reservar(cmbPasajerosV1.getSelectedItem().toString(), txtAsientoV1.getText(), 1);
+            reservar(cmbPasajerosV2.getSelectedItem().toString(), txtAsientoV2.getText(), 2);
+            reservar(cmbPasajerosV3.getSelectedItem().toString(), txtAsientoV3.getText(), 3);
+        }
+    }//GEN-LAST:event_btnPruebaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiarV1;
     private javax.swing.JButton btnCambiarV2;
@@ -670,13 +691,13 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarV1;
     private javax.swing.JButton btnEliminarV2;
     private javax.swing.JButton btnEliminarV3;
+    private javax.swing.JButton btnPrueba;
     private javax.swing.JButton btnReservarV1;
     private javax.swing.JButton btnReservarV2;
     private javax.swing.JButton btnReservarV3;
     private javax.swing.JComboBox<String> cmbPasajerosV1;
     private javax.swing.JComboBox<String> cmbPasajerosV2;
     private javax.swing.JComboBox<String> cmbPasajerosV3;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
