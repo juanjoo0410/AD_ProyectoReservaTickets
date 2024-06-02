@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -132,7 +133,14 @@ public class frmMain extends javax.swing.JFrame {
         if (!isEmpty(pasajero, asiento)) {
             if (rangeNumber(seat)) {
                 String passenger = pasajero;
+                Random random = new Random();
+                int tiempoEspera = random.nextInt(5) + 1;
                 new Thread(() -> {
+                    try {
+                        Thread.sleep(tiempoEspera * 1000); // Espera el tiempo en segundos convertido a milisegundos
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     boolean success = reservaTickets.reserveSeat(seat, passenger);
                     SwingUtilities.invokeLater(() -> {
                         if (success) {
