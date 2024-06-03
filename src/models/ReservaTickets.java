@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReservaTickets {
     private final int totalSeats = 30;
     private final Map<Integer, String> seats = new HashMap<>();
-    private final Map<Integer, ConcurrentLinkedQueue<String>> waitingQueues = new HashMap<>();
+    private final Map<Integer, ConcurrentLinkedQueue<String>> waitingQueues = new HashMap<>(); //Cola
     private final ReentrantLock lock = new ReentrantLock();
 
     public ReservaTickets() {
@@ -77,7 +77,7 @@ public class ReservaTickets {
         }
     }
 
-    private void assignSeatToNextPassenger(int seatNumber) {
+    private void assignSeatToNextPassenger(int seatNumber) { //Asignacion de asientos segun la cola
         String nextPassenger = waitingQueues.get(seatNumber).poll();
         if (nextPassenger != null) {
             seats.put(seatNumber, nextPassenger);
@@ -85,7 +85,7 @@ public class ReservaTickets {
         }
     }
     
-    public String getSeatsStatus() {
+    public String getSeatsStatus() { //Llenar Labels de asientos
         StringBuilder status = new StringBuilder();
         lock.lock();
         try {

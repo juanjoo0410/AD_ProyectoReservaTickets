@@ -42,12 +42,12 @@ public class frmMain extends javax.swing.JFrame {
         initComponents();
         reservaTickets = new ReservaTickets();
         lbAsientos = new JLabel[TOTAL_ASIENTOS];
-        showAsientos();
-        updateSeatsStatus();
-        redirectSystemOutToTextArea();
+        showAsientos(); //Mostrar asientos
+        updateSeatsStatus(); //Actualizar estado asientos
+        redirectSystemOutToTextArea(); //Mostrar Log
     }
 
-    public void showAsientos() {
+    public void showAsientos() { //Muestra Labels de asientos
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
@@ -74,7 +74,7 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
-    private void updateSeatsStatus() {
+    private void updateSeatsStatus() { //Actualiza estado de asientos
         StyledDocument doc = pnPasajeros.getStyledDocument();
         pnPasajeros.setText("");
 
@@ -100,7 +100,7 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
-    private void logMessage(String message) {
+    private void logMessage(String message) { //Muestra textos en log de procesos
         txtLog.append(message);
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
@@ -129,8 +129,8 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     private void reservar(String pasajero, String asiento, int ventanilla) {
-        int seat = Integer.parseInt(asiento);
         if (!isEmpty(pasajero, asiento)) {
+            int seat = Integer.parseInt(asiento);
             if (rangeNumber(seat)) {
                 String passenger = pasajero;
                 Random random = new Random();
@@ -158,8 +158,8 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     private void eliminar(String pasajero, String asiento, int ventanilla) {
-        int seat = Integer.parseInt(asiento);
         if (!isEmpty(pasajero, asiento)) {
+            int seat = Integer.parseInt(asiento);
             if (rangeNumber(seat)) {
                 new Thread(() -> {
                     boolean success = reservaTickets.cancelReservation(seat);
@@ -179,8 +179,8 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     private void cambiar(String pasajero, String asiento, int ventanilla) {
-        int newSeat = Integer.parseInt(asiento);
         if (!isEmpty(pasajero, asiento)) {
+            int newSeat = Integer.parseInt(asiento);
             if (rangeNumber(newSeat)) {
                 String passenger = pasajero;
                 new Thread(() -> {
@@ -205,7 +205,7 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
-    private boolean isEmpty(String nomCliente, String numAsiento) {
+    private boolean isEmpty(String nomCliente, String numAsiento) { //Valida si los campos estan vacios
         if (numAsiento.isEmpty() || "Seleccionar..".equals(nomCliente)) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos para la reserva.",
                     "Campos incompletos", JOptionPane.WARNING_MESSAGE);
@@ -214,7 +214,7 @@ public class frmMain extends javax.swing.JFrame {
         return false;
     }
 
-    private boolean rangeNumber(int asiento) {
+    private boolean rangeNumber(int asiento) { //Valida rango de numeros de 1 a 30
         boolean estado = false;
         if (asiento > 0 && asiento <= TOTAL_ASIENTOS) {
             estado = true;
@@ -225,7 +225,7 @@ public class frmMain extends javax.swing.JFrame {
         return estado;
     }
 
-    private void singleNumbers(KeyEvent evt) {
+    private void singleNumbers(KeyEvent evt) { //Solo numeros
         char c = evt.getKeyChar();
         if (c < '0' || c > '9') {
             evt.consume();
